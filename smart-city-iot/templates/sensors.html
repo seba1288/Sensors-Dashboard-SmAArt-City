@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sensor Management</h1>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sensor in sensors %}
+        <tr>
+            <td>{{ sensor.id }}</td>
+            <td>{{ sensor.name }}</td>
+            <td>{{ sensor.type }}</td>
+            <td>{{ sensor.location }}</td>
+            <td><a href="{{ url_for('main.sensor_detail', sensor_id=sensor.id) }}" class="btn-small">View Details</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No sensors registered yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

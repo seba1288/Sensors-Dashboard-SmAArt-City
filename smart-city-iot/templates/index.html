@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="metrics-grid">
+    <div class="card">
+        <h3>Total Sensors</h3>
+        <p class="big-number">{{ total_sensors }}</p>
+    </div>
+    <div class="card">
+        <h3>Online Sensors</h3>
+        <p class="big-number">{{ online_sensors }} / {{ total_sensors }}</p>
+    </div>
+    <div class="card">
+        <h3>Active Alerts</h3>
+        <p class="big-number error">{{ alerts|length }}</p>
+    </div>
+</div>
+
+<div class="alerts-section">
+    <h2>Recent Alerts</h2>
+    {% if alerts %}
+    <ul>
+        {% for alert in alerts %}
+        <li class="alert {{ alert.severity }}">
+            <strong>{{ alert.sensor_id }}</strong>: {{ alert.message }} ({{ alert.timestamp.strftime('%Y-%m-%d %H:%M') }})
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No active alerts.</p>
+    {% endif %}
+</div>
+{% endblock %}

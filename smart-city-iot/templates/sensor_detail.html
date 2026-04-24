@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sensor: {{ sensor.name }} ({{ sensor.id }})</h1>
+<div class="sensor-info">
+    <p><strong>Type:</strong> {{ sensor.type }}</p>
+    <p><strong>Location:</strong> {{ sensor.location }}</p>
+    <p><strong>Battery:</strong>
+        {% if battery %}
+            {{ battery.battery_percentage | round(1) }}% ({{ battery.battery_voltage }}V)
+        {% else %}
+            Unknown
+        {% endif %}
+    </p>
+</div>
+
+<h2>Recent Data</h2>
+{% if recent_data %}
+<table class="data-table">
+    <thead><tr><th>Time</th><th>Parameter</th><th>Value</th></tr></thead>
+    <tbody>
+        {% for data in recent_data %}
+        <tr>
+            <td>{{ data.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td>{{ data.parameter }}</td>
+            <td>{{ data.value }} {{ data.unit }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No recent data.</p>
+{% endif %}
+
+<h2>Recent Alerts</h2>
+{% if alerts %}
+<ul>
+    {% for alert in alerts %}
+    <li class="alert {{ alert.severity }}">{{ alert.message }} ({{ alert.timestamp.strftime('%Y-%m-%d %H:%M:%S') }})</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No alerts recorded for this sensor.</p>
+{% endif %}
+{% endblock %}
