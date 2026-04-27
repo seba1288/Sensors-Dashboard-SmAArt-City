@@ -1,9 +1,12 @@
 {
   "name": "@figma/my-make-file",
   "private": true,
+  "homepage": "https://seba1288.github.io/Sensors-Dashboard-SmAArt-City",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist",
      "dev": "vite",
      "start": "vite",
      "build": "vite build"
@@ -70,6 +73,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
     "@vitejs/plugin-react": "4.7.0",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "4.1.12",
     "vite": "6.3.5"
   },
